@@ -24,11 +24,13 @@ const rollupSymbols = exportedSymbolsFromFile("./rollup-index.d.ts");
 
 const allSymbols = new Set([...esbuildSymbols, ...rollupSymbols]);
 
-console.log("CHECKING EXPORTED SYMBOLS");
-for (const symbol of allSymbols) {
-  const rollup = rollupSymbols.includes(symbol) ? "✅" : "❌";
-  const esbuild = esbuildSymbols.includes(symbol) ? "✅" : "❌";
-  const space =
-    symbol.length < 15 ? "\t\t\t" : symbol.length < 20 ? "\t\t" : "\t";
-  console.log(`${symbol} ${space}rollup: ${rollup}\tesbuild: ${esbuild}`);
+if (process.argv.includes("--check-symbols")) {
+  console.log("CHECKING EXPORTED SYMBOLS");
+  for (const symbol of allSymbols) {
+    const rollup = rollupSymbols.includes(symbol) ? "✅" : "❌";
+    const esbuild = esbuildSymbols.includes(symbol) ? "✅" : "❌";
+    const space =
+      symbol.length < 15 ? "\t\t\t" : symbol.length < 20 ? "\t\t" : "\t";
+    console.log(`${symbol} ${space}rollup: ${rollup}\tesbuild: ${esbuild}`);
+  }
 }
