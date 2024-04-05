@@ -1,6 +1,5 @@
 export declare class MockAttributeMap {
   caseInsensitive: boolean;
-  __items: MockAttr[];
   constructor(caseInsensitive?: boolean);
   get length(): number;
   item(index: number): MockAttr;
@@ -23,9 +22,6 @@ export declare function cloneAttributes(
   sortByName?: boolean,
 ): MockAttributeMap;
 export declare class MockAttr {
-  private _name;
-  private _value;
-  private _namespaceURI;
   constructor(
     attrName: string,
     attrValue: string,
@@ -43,7 +39,6 @@ export declare class MockAttr {
   set namespaceURI(namespaceURI: string);
 }
 declare class MockClassList {
-  private elm;
   constructor(elm: HTMLElement);
   add(...classNames: string[]): void;
   remove(...classNames: string[]): void;
@@ -54,7 +49,6 @@ declare class MockClassList {
   toString(): string;
 }
 declare class MockCSSStyleDeclaration {
-  private _styles;
   setProperty(prop: string, value: string): void;
   getPropertyValue(prop: string): string;
   removeProperty(prop: string): void;
@@ -63,7 +57,6 @@ declare class MockCSSStyleDeclaration {
   set cssText(cssText: string);
 }
 declare class MockHistory {
-  private items;
   get length(): number;
   back(): void;
   forward(): void;
@@ -90,7 +83,6 @@ declare class MockLocation implements Location {
   username: string;
   password: string;
   origin: string;
-  private _href;
   get href(): string;
   set href(value: string);
   assign(_url: string): void;
@@ -106,7 +98,6 @@ declare class MockNavigator {
   userAgent: string;
 }
 declare class MockStorage {
-  private items;
   key(_value: number): void;
   getItem(key: string): string;
   setItem(key: string, value: string): void;
@@ -118,27 +109,6 @@ declare const nativeClearTimeout: typeof clearTimeout;
 declare const nativeSetInterval: typeof setInterval;
 declare const nativeSetTimeout: typeof setTimeout;
 export declare class MockWindow {
-  __timeouts: Set<any>;
-  __history: MockHistory;
-  __elementCstr: any;
-  __htmlElementCstr: any;
-  __charDataCstr: any;
-  __docTypeCstr: any;
-  __docCstr: any;
-  __docFragCstr: any;
-  __domTokenListCstr: any;
-  __nodeCstr: any;
-  __nodeListCstr: any;
-  __localStorage: MockStorage;
-  __sessionStorage: MockStorage;
-  __location: MockLocation;
-  __navigator: MockNavigator;
-  __clearInterval: typeof nativeClearInterval;
-  __clearTimeout: typeof nativeClearTimeout;
-  __setInterval: typeof nativeSetInterval;
-  __setTimeout: typeof nativeSetTimeout;
-  __maxTimeout: number;
-  __allowInterval: boolean;
   URL: typeof URL;
   console: Console;
   customElements: CustomElementRegistry;
@@ -411,9 +381,7 @@ declare class MockEventListener {
   handler: (ev?: any) => void;
   constructor(type: string, handler: any);
 }
-interface EventTarget$1 {
-  __listeners: MockEventListener[];
-}
+interface EventTarget$1 {}
 /**
  * Serialize a node (either a DOM node or a mock-doc node) to an HTML string
  *
@@ -440,7 +408,6 @@ export interface SerializeNodeToHtmlOptions {
   serializeShadowRoot?: boolean;
 }
 export declare class MockNode {
-  private _nodeValue;
   nodeName: string | null;
   nodeType: number;
   ownerDocument: any;
@@ -484,10 +451,6 @@ export declare class MockNode {
 }
 type MockElementInternals = Record<keyof ElementInternals, null>;
 export declare class MockElement extends MockNode {
-  __namespaceURI: string | null;
-  __attributeMap: MockAttributeMap | null | undefined;
-  __shadowRoot: ShadowRoot | null | undefined;
-  __style: MockCSSStyleDeclaration | null | undefined;
   attachInternals(): MockElementInternals;
   constructor(
     ownerDocument: any,
@@ -682,7 +645,6 @@ export declare class MockElement extends MockNode {
   toString(opts?: SerializeNodeToHtmlOptions): string;
 }
 export declare class MockHTMLElement extends MockElement {
-  __namespaceURI: string;
   constructor(ownerDocument: any, nodeName: string);
   get tagName(): string;
   set tagName(value: string);
@@ -777,7 +739,6 @@ export declare function setupGlobal(gbl: any): any;
 export declare function teardownGlobal(gbl: any): void;
 export declare function patchWindow(winToBePatched: any): void;
 export declare class MockHeaders {
-  private _values;
   constructor(init?: string[][] | Map<string, string> | any);
   append(key: string, value: string): void;
   delete(key: string): void;
@@ -819,8 +780,6 @@ export interface MockRequestInit {
   referrerPolicy?: string;
 }
 export declare class MockRequest {
-  private _method;
-  private _url;
   bodyUsed: boolean;
   cache: string;
   credentials: string;
@@ -847,7 +806,6 @@ export interface MockResponseInit {
   url?: string;
 }
 export declare class MockResponse {
-  private _body;
   headers: MockHeaders;
   ok: boolean;
   status: number;
